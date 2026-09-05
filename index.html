@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solid Waste Generation Analytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand" onclick="navigateTo('home')">Solid Waste Analytics</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <button class="nav-link active" id="nav-home" onclick="navigateTo('home')">Home</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="nav-analytics" onclick="navigateTo('analytics')">Collected Data Analytics</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="nav-findings" onclick="navigateTo('findings')">Findings</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- 1. HOME / OPENING PAGE -->
+    <section id="view-home" class="page-view active">
+      <div class="hero-section">
+        <div class="hero-badge">Analytical Study & Report</div>
+        <h1 class="hero-title">Solid Waste Generation Analytics</h1>
+        <p class="hero-subtitle">
+          An in-depth assessment of municipal and household solid waste generation, segregation practices, public awareness levels, and sustainable management methods.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="navigateTo('analytics')">View Collected Data Analytics</button>
+          <button class="btn btn-outline" onclick="navigateTo('findings')">View Findings & Suggestions</button>
+        </div>
+      </div>
+
+      <div class="home-summary-grid">
+        <div class="summary-card" onclick="navigateTo('analytics')">
+          <div class="card-icon">📊</div>
+          <h3>Collected Data Analytics</h3>
+          <p>Explore survey responses, segregation percentages, and 5 detailed analytical graphs on waste management.</p>
+          <span class="card-arrow">&rarr; Explore Data</span>
+        </div>
+        <div class="summary-card" onclick="navigateTo('findings')">
+          <div class="card-icon">💡</div>
+          <h3>Overall Findings & Suggestions</h3>
+          <p>Review key observations on segregation, community participation, environmental impact, and actionable recommendations.</p>
+          <span class="card-arrow">&rarr; Read Findings</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. COLLECTED DATA ANALYTICS PAGE -->
+    <section id="view-analytics" class="page-view">
+      <div class="page-header">
+        <h2 class="page-title">Collected Data Analytics</h2>
+        <p class="page-desc">Comprehensive visual breakdown of survey responses and waste generation data.</p>
+      </div>
+
+      <!-- Small Info Boxes (Key Metrics) -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">100</div>
+          <div class="stat-label">Total Responses</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">72%</div>
+          <div class="stat-label">People Aware of Segregation</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">61%</div>
+          <div class="stat-label">Regularly Segregate Waste</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">84%</div>
+          <div class="stat-label">Support Better Waste Management</div>
+        </div>
+      </div>
+
+      <!-- 5 Graphs Grid -->
+      <div class="charts-grid">
+        <!-- Graph 1 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>1. Most Common Waste Type</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-waste-type" width="400" height="260"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 2 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>2. Waste Segregation Practice</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-segregation-practice" width="400" height="260"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 3 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>3. Awareness Level</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-awareness-level" width="400" height="260"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 4 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>4. Preferred Waste Management Method</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-preferred-method" width="400" height="260"></canvas>
+          </div>
+        </div>
+
+        <!-- Graph 5 -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3>5. Waste Disposal Frequency</h3>
+          </div>
+          <div class="chart-container">
+            <canvas id="chart-disposal-frequency" width="400" height="260"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Information Box: Survey Observation -->
+      <div class="info-box survey-observation-box">
+        <div class="info-box-header">
+          <span class="info-box-icon">📋</span>
+          <h3>Survey Observation</h3>
+        </div>
+        <div class="info-box-body">
+          <p>
+            Based on the survey of <strong>100 respondents</strong>, there is strong baseline environmental awareness with <strong>72%</strong> of individuals conscious of segregation principles. While <strong>61%</strong> currently segregate waste on a regular basis, there remains an actionable gap of 39% who practice it occasionally or not at all.
+          </p>
+          <p>
+            The majority of solid waste comprises organic food waste (45%) followed by recyclable plastics (25%). Furthermore, an overwhelming <strong>84%</strong> expressed active willingness to support and cooperate with improved waste management infrastructure and door-to-door collection initiatives.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FINDINGS PAGE -->
+    <section id="view-findings" class="page-view">
+      <div class="page-header">
+        <h2 class="page-title">Overall Findings & Suggestions</h2>
+        <p class="page-desc">Core insights gathered from field analytics alongside key policy and community suggestions.</p>
+      </div>
+
+      <!-- Information Boxes Grid -->
+      <div class="findings-grid">
+        <div class="finding-card">
+          <div class="finding-title">
+            <span class="finding-icon">♻️</span> Waste Segregation
+          </div>
+          <div class="finding-text">
+            Waste should be separated at source into appropriate categories such as wet, dry and recyclable waste.
+          </div>
+        </div>
+
+        <div class="finding-card">
+          <div class="finding-title">
+            <span class="finding-icon">🏠</span> Community Participation
+          </div>
+          <div class="finding-text">
+            Community participation plays an important role in improving waste management.
+          </div>
+        </div>
+
+        <div class="finding-card">
+          <div class="finding-title">
+            <span class="finding-icon">🌱</span> Environmental Protection
+          </div>
+          <div class="finding-text">
+            Better segregation and recycling can help reduce environmental pollution.
+          </div>
+        </div>
+
+        <div class="finding-card">
+          <div class="finding-title">
+            <span class="finding-icon">📢</span> Public Awareness
+          </div>
+          <div class="finding-text">
+            Regular awareness programs can encourage responsible waste disposal practices.
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations Box -->
+      <div class="recommendations-box">
+        <div class="recommendations-header">
+          <span class="recommendations-icon">📝</span>
+          <h3>Recommendations</h3>
+        </div>
+        <ul class="recommendations-list">
+          <li>Promote segregation of waste at source.</li>
+          <li>Provide separate bins for different waste categories.</li>
+          <li>Increase awareness through community campaigns.</li>
+          <li>Encourage recycling and reuse.</li>
+          <li>Improve collection and processing facilities.</li>
+          <li>Promote responsible disposal of hazardous waste.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

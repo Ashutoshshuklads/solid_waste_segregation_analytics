@@ -1212,13 +1212,10 @@ function renderAllCharts() {
 
 // ==========================================================
 // Survey Charts
-// Questions 1 to 10
-// Donut Charts
+// Field Visit Comparison - 3 Locations
 // ==========================================================
-function drawDonutChart(
-  canvasId,
-  data
-) {
+
+function drawSurveyComparisonChart(canvasId, data) {
 
   const setup =
     setupCanvas(canvasId);
@@ -1233,67 +1230,140 @@ function drawDonutChart(
   } = setup;
 
 
-  const total =
-    data.reduce(
-      (sum, item) =>
-        sum + item.value,
-      0
+  ctx.clearRect(
+    0,
+    0,
+    width,
+    height
+  );
+
+
+  // --------------------------------------------------------
+  // Group same answers
+  // --------------------------------------------------------
+
+  const grouped = {};
+
+
+  data.forEach(item => {
+
+    if (!grouped[item.answer]) {
+
+      grouped[item.answer] = {
+
+        count: 0,
+
+        color: item.color
+
+      };
+
+    }
+
+
+    grouped[item.answer].count++;
+
+  });
+
+
+  const pieData =
+    Object.keys(grouped).map(
+      answer => {
+
+        const count =
+          grouped[answer].count;
+
+
+        let percentage;
+
+
+        if (count === 3) {
+
+          percentage = 100;
+
+        }
+        else if (count === 2) {
+
+          percentage = 66.66;
+
+        }
+        else {
+
+          percentage = 33.33;
+
+        }
+
+
+        return {
+
+          label: answer,
+
+          count: count,
+
+          value: percentage,
+
+          color:
+            grouped[answer].color
+
+        };
+
+      }
     );
 
 
+  // --------------------------------------------------------
+  // Pie Chart
+  // --------------------------------------------------------
+
   const centerX =
-    width * 0.35;
+    width / 2;
 
 
-  const centerY =
-    height / 2;
+  const centerY = 82;
 
 
-  const outerRadius =
+  const radius =
     Math.min(
-      centerX,
-      centerY
-    ) - 15;
-
-
-  const innerRadius =
-    outerRadius * 0.55;
+      width,
+      180
+    ) * 0.34;
 
 
   let startAngle =
     -Math.PI / 2;
 
 
-  data.forEach(item => {
+  pieData.forEach(item => {
 
     const sliceAngle =
-      (item.value / total) *
+      (item.count / data.length) *
       2 *
       Math.PI;
 
 
+    const endAngle =
+      startAngle +
+      sliceAngle;
+
+
     ctx.beginPath();
 
-    ctx.arc(
+    ctx.moveTo(
       centerX,
-      centerY,
-      outerRadius,
-      startAngle,
-      startAngle + sliceAngle
+      centerY
     );
 
 
     ctx.arc(
       centerX,
       centerY,
-      innerRadius,
-      startAngle + sliceAngle,
+      radius,
       startAngle,
-      true
+      endAngle
     );
 
 
     ctx.closePath();
+
 
     ctx.fillStyle =
       item.color;
@@ -1301,63 +1371,70 @@ function drawDonutChart(
     ctx.fill();
 
 
-    startAngle +=
-      sliceAngle;
+    ctx.strokeStyle =
+      '#ffffff';
+
+    ctx.lineWidth = 3;
+
+    ctx.stroke();
+
+
+    // Percentage text
+    const textAngle =
+      startAngle +
+      sliceAngle / 2;
+
+
+    const textX =
+      centerX +
+      Math.cos(textAngle) *
+      radius *
+      0.62;
+
+
+    const textY =
+      centerY +
+      Math.sin(textAngle) *
+      radius *
+      0.62;
+
+
+    ctx.fillStyle =
+      '#ffffff';
+
+    ctx.font =
+      'bold 12px sans-serif';
+
+    ctx.textAlign =
+      'center';
+
+    ctx.textBaseline =
+      'middle';
+
+
+    ctx.fillText(
+      `${item.value}%`,
+      textX,
+      textY
+    );
+
+
+    startAngle =
+      endAngle;
 
   });
 
 
-  // Center
-  ctx.fillStyle =
-    '#1f2937';
+  // --------------------------------------------------------
+  // Three Areas + Actual Answers
+  // --------------------------------------------------------
 
-  ctx.font =
-    'bold 14px sans-serif';
-
-  ctx.textAlign =
-    'center';
-
-
-  ctx.fillText(
-    '100%',
-    centerX,
-    centerY - 2
-  );
-
-
-  ctx.fillStyle =
-    '#6b7280';
-
-  ctx.font =
-    '10px sans-serif';
-
-
-  ctx.fillText(
-    'Respondents',
-    centerX,
-    centerY + 12
-  );
-
-
-  // Legend
-  const legendX =
-    width * 0.64;
-
-
-  const rowHeight =
-    data.length > 5
-      ? 22
-      : 25;
-
-
-  let legendY =
-    height / 2 -
-    (data.length * rowHeight) / 2 +
-    8;
+  let textY = 166;
 
 
   data.forEach(item => {
 
+    // Area color indicator
     ctx.fillStyle =
       item.color;
 
@@ -1365,16 +1442,17 @@ function drawDonutChart(
     ctx.beginPath();
 
     ctx.roundRect(
-      legendX,
-      legendY,
-      10,
-      10,
+      15,
+      textY - 8,
+      9,
+      9,
       2
     );
 
     ctx.fill();
 
 
+    // Area name
     ctx.fillStyle =
       '#1f2937';
 
@@ -1384,30 +1462,39 @@ function drawDonutChart(
     ctx.textAlign =
       'left';
 
+    ctx.textBaseline =
+      'alphabetic';
+
 
     ctx.fillText(
-      `${item.value}%`,
-      legendX + 16,
-      legendY + 9
+      item.area + ':',
+      30,
+      textY
     );
+
+
+    // Answer
+    const areaWidth =
+      ctx.measureText(
+        item.area + ':'
+      ).width;
 
 
     ctx.fillStyle =
       '#4b5563';
 
     ctx.font =
-      '9px sans-serif';
+      '10px sans-serif';
 
 
     ctx.fillText(
-      item.label,
-      legendX + 46,
-      legendY + 9
+      item.answer,
+      36 + areaWidth,
+      textY
     );
 
 
-    legendY +=
-      rowHeight;
+    textY += 25;
 
   });
 
@@ -1416,281 +1503,266 @@ function drawDonutChart(
 
 
 // ==========================================================
-// Actual Survey Data
-// 100-Respondent Equivalent
+// Actual Field Visit Survey Data
+// 3 Locations
 // ==========================================================
+
 const surveyData = {
 
-  // Q1
+  // --------------------------------------------------------
+  // Q1 - Most Common Waste Generated
+  // --------------------------------------------------------
   1: [
 
     {
-      label: 'Food/Kitchen waste',
-      value: 58,
+      area: 'Yashwant Shrusti',
+      answer: 'Organic/Wet Waste',
       color: '#2e7d32'
     },
 
     {
-      label: 'Other',
-      value: 25,
-      color: '#388e3c'
+      area: 'PAM',
+      answer: 'Plastic Waste',
+      color: '#f59e0b'
     },
 
     {
-      label: 'Paper',
-      value: 9,
-      color: '#4caf50'
-    },
-
-    {
-      label: 'Plastic',
-      value: 8,
-      color: '#81c784'
+      area: 'Shivaji Nagar',
+      answer: 'Plastic Waste',
+      color: '#ef4444'
     }
 
   ],
 
 
-  // Q2
+  // --------------------------------------------------------
+  // Q2 - Separate Wet & Dry Waste Bins
+  // --------------------------------------------------------
   2: [
 
     {
-      label: 'Less than 1 kg',
-      value: 50,
+      area: 'Yashwant Shrusti',
+      answer: 'Yes',
       color: '#2e7d32'
     },
 
     {
-      label: '1- kg',
-      value: 25,
-      color: '#388e3c'
-    },
-
-    {
-      label: 'More than 5 kg',
-      value: 17,
+      area: 'PAM',
+      answer: 'Yes',
       color: '#f59e0b'
     },
 
     {
-      label: '3-5 kg',
-      value: 8,
-      color: '#94a3b8'
+      area: 'Shivaji Nagar',
+      answer: 'No',
+      color: '#ef4444'
     }
 
   ],
 
 
-  // Q3
+  // --------------------------------------------------------
+  // Q3 - Waste Segregation
+  // --------------------------------------------------------
   3: [
 
     {
-      label: 'Always',
-      value: 25,
+      area: 'Yashwant Shrusti',
+      answer: 'Partially Segregated',
       color: '#2e7d32'
     },
 
     {
-      label: 'Sometimes',
-      value: 17,
+      area: 'PAM',
+      answer: 'Partially Segregated',
       color: '#f59e0b'
     },
 
     {
-      label: 'Never',
-      value: 58,
+      area: 'Shivaji Nagar',
+      answer: 'Not Segregated',
       color: '#ef4444'
     }
 
   ],
 
 
-  // Q4
+  // --------------------------------------------------------
+  // Q4 - Cleanliness Level
+  // --------------------------------------------------------
   4: [
 
     {
-      label: 'Yes',
-      value: 42,
+      area: 'Yashwant Shrusti',
+      answer: 'Moderately Clean',
       color: '#2e7d32'
     },
 
     {
-      label: 'No',
-      value: 58,
+      area: 'PAM',
+      answer: 'Dirty',
+      color: '#f59e0b'
+    },
+
+    {
+      area: 'Shivaji Nagar',
+      answer: 'Dirty',
       color: '#ef4444'
     }
 
   ],
 
 
-  // Q5
+  // --------------------------------------------------------
+  // Q5 - Covered Bins
+  // --------------------------------------------------------
   5: [
 
     {
-      label: 'Wet waste',
-      value: 42,
+      area: 'Yashwant Shrusti',
+      answer: 'Yes, all covered',
       color: '#2e7d32'
     },
 
     {
-      label: 'I do not separate waste',
-      value: 42,
+      area: 'PAM',
+      answer: 'Some are covered',
       color: '#f59e0b'
     },
 
     {
-      label: 'Glass/Metal',
-      value: 16,
-      color: '#3b82f6'
-    }
-
-  ],
-
-
-  // Q6
-  6: [
-
-    {
-      label: 'Yes',
-      value: 33,
-      color: '#2e7d32'
-    },
-
-    {
-      label: 'Somewhat',
-      value: 34,
-      color: '#65a30d'
-    },
-
-    {
-      label: 'No',
-      value: 33,
-      color: '#9ca3af'
-    }
-
-  ],
-
-
-  // Q7
-  7: [
-
-    {
-      label: 'Daily',
-      value: 58,
-      color: '#2e7d32'
-    },
-
-    {
-      label: "I don't know",
-      value: 25,
-      color: '#3b82f6'
-    },
-
-    {
-      label: 'Irregularly',
-      value: 9,
-      color: '#8b5cf6'
-    },
-
-    {
-      label: 'Once a week',
-      value: 8,
-      color: '#f59e0b'
-    }
-
-  ],
-
-
-  // Q8
-  8: [
-
-    {
-      label: "I don't know",
-      value: 50,
-      color: '#2e7d32'
-    },
-
-    {
-      label: 'Municipal workers',
-      value: 17,
-      color: '#3b82f6'
-    },
-
-    {
-      label: 'Society/Building staff',
-      value: 17,
-      color: '#8b5cf6'
-    },
-
-    {
-      label: 'Private waste collector',
-      value: 8,
-      color: '#f59e0b'
-    },
-
-    {
-      label: 'Other',
-      value: 8,
-      color: '#94a3b8'
-    }
-
-  ],
-
-
-  // Q9
-  9: [
-
-    {
-      label: 'Yes',
-      value: 33,
-      color: '#2e7d32'
-    },
-
-    {
-      label: 'Partially',
-      value: 17,
-      color: '#f59e0b'
-    },
-
-    {
-      label: 'No',
-      value: 50,
+      area: 'Shivaji Nagar',
+      answer: 'Some are covered',
       color: '#ef4444'
     }
 
   ],
 
 
-  // Q10
-  10: [
+  // --------------------------------------------------------
+  // Q6 - Waste Bin Overflowing
+  // --------------------------------------------------------
+  6: [
 
     {
-      label: 'Lack of awareness',
-      value: 33,
+      area: 'Yashwant Shrusti',
+      answer: 'Never',
       color: '#2e7d32'
     },
 
     {
-      label: 'Lack of dustbins',
-      value: 17,
-      color: '#3b82f6'
-    },
-
-    {
-      label: 'Other',
-      value: 25,
+      area: 'PAM',
+      answer: 'Sometimes',
       color: '#f59e0b'
     },
 
     {
-      label: 'Poor waste segregation',
-      value: 17,
-      color: '#94a3b8'
+      area: 'Shivaji Nagar',
+      answer: 'Sometimes',
+      color: '#ef4444'
+    }
+
+  ],
+
+
+  // --------------------------------------------------------
+  // Q7 - Litter Around the Area
+  // --------------------------------------------------------
+  7: [
+
+    {
+      area: 'Yashwant Shrusti',
+      answer: 'No',
+      color: '#2e7d32'
     },
 
     {
-      label: 'Irregular waste collection',
-      value: 8,
+      area: 'PAM',
+      answer: 'Somewhat',
+      color: '#f59e0b'
+    },
+
+    {
+      area: 'Shivaji Nagar',
+      answer: 'Somewhat',
+      color: '#ef4444'
+    }
+
+  ],
+
+
+  // --------------------------------------------------------
+  // Q8 - Waste Collection Method
+  // --------------------------------------------------------
+  8: [
+
+    {
+      area: 'Yashwant Shrusti',
+      answer: 'Waste Collection Vehicle',
+      color: '#2e7d32'
+    },
+
+    {
+      area: 'PAM',
+      answer: 'Waste Collection Vehicle',
+      color: '#f59e0b'
+    },
+
+    {
+      area: 'Shivaji Nagar',
+      answer: 'Waste Collection Vehicle',
+      color: '#ef4444'
+    }
+
+  ],
+
+
+  // --------------------------------------------------------
+  // Q9 - Waste Management Accessibility
+  // --------------------------------------------------------
+  9: [
+
+    {
+      area: 'Yashwant Shrusti',
+      answer: 'Yes',
+      color: '#2e7d32'
+    },
+
+    {
+      area: 'PAM',
+      answer: 'Yes',
+      color: '#f59e0b'
+    },
+
+    {
+      area: 'Shivaji Nagar',
+      answer: 'Yes',
+      color: '#ef4444'
+    }
+
+  ],
+
+
+  // --------------------------------------------------------
+  // Q10 - Awareness / Signage
+  // --------------------------------------------------------
+  10: [
+
+    {
+      area: 'Yashwant Shrusti',
+      answer: 'Yes',
+      color: '#2e7d32'
+    },
+
+    {
+      area: 'PAM',
+      answer: 'No',
+      color: '#f59e0b'
+    },
+
+    {
+      area: 'Shivaji Nagar',
+      answer: 'No',
       color: '#ef4444'
     }
 
@@ -1703,12 +1775,13 @@ const surveyData = {
 // ==========================================================
 // Render All Survey Charts
 // ==========================================================
+
 function renderAllSurveyCharts() {
 
   Object.keys(surveyData).forEach(
     number => {
 
-      drawDonutChart(
+      drawSurveyComparisonChart(
         `survey-chart-${number}`,
         surveyData[number]
       );

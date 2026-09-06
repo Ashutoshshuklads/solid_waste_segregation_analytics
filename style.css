@@ -959,7 +959,47 @@ body {
   }
 
 }
+/* ==========================================================
+   SURVEY FIELD VISIT TABLE
+   ========================================================== */
 
+#view-surveys table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+#view-surveys th,
+#view-surveys td {
+  border: 1px solid #d1d5db;
+  padding: 12px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+#view-surveys th {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+#view-surveys td {
+  color: var(--text-main);
+  background: #ffffff;
+}
+
+#view-surveys tr:nth-child(even) td {
+  background: #f8fafc;
+}
+
+#view-surveys tr:hover td {
+  background: var(--primary-light);
+}
 
 /* ==========================================================
    EXTRA POLISH

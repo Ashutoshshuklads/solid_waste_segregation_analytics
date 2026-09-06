@@ -6,46 +6,68 @@
   <title>Solid Waste Generation Analytics</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
-      <div class="nav-brand" onclick="navigateTo('home')">Solid Waste Analytics</div>
+
+      <div class="nav-brand" onclick="navigateTo('home')">
+        Solid Waste Analytics
+      </div>
 
       <ul class="nav-menu">
+
         <li class="nav-item">
-          <button class="nav-link active" id="nav-home" onclick="navigateTo('home')">Home</button>
+          <button
+            class="nav-link active"
+            id="nav-home"
+            onclick="navigateTo('home')">
+            Home
+          </button>
         </li>
 
         <li class="nav-item">
-          <button class="nav-link" id="nav-analytics" onclick="navigateTo('analytics')">
+          <button
+            class="nav-link"
+            id="nav-analytics"
+            onclick="navigateTo('analytics')">
             Collected Data Analytics
           </button>
         </li>
 
         <li class="nav-item">
-          <button class="nav-link" id="nav-surveys" onclick="navigateTo('surveys')">
+          <button
+            class="nav-link"
+            id="nav-surveys"
+            onclick="navigateTo('surveys')">
             Surveys
           </button>
         </li>
 
         <li class="nav-item">
-          <button class="nav-link" id="nav-findings" onclick="navigateTo('findings')">
+          <button
+            class="nav-link"
+            id="nav-findings"
+            onclick="navigateTo('findings')">
             Findings
           </button>
         </li>
+
       </ul>
     </div>
   </nav>
 
 
-  <!-- Main Content Container -->
+  <!-- Main Content -->
   <main class="main-content">
 
-    <!-- ======================================================
-         1. HOME PAGE
-         ====================================================== -->
+
+    <!-- =====================================================
+         HOME
+         ===================================================== -->
+
     <section id="view-home" class="page-view active">
 
       <div class="hero-section">
@@ -79,6 +101,7 @@
           </button>
 
         </div>
+
       </div>
 
 
@@ -88,7 +111,9 @@
           class="summary-card"
           onclick="navigateTo('analytics')">
 
-          <div class="card-icon">📊</div>
+          <div class="card-icon">
+            📊
+          </div>
 
           <h3>
             Collected Data Analytics
@@ -110,7 +135,9 @@
           class="summary-card"
           onclick="navigateTo('findings')">
 
-          <div class="card-icon">💡</div>
+          <div class="card-icon">
+            💡
+          </div>
 
           <h3>
             Overall Findings & Suggestions
@@ -133,9 +160,11 @@
     </section>
 
 
-    <!-- ======================================================
-         2. COLLECTED DATA ANALYTICS PAGE
-         ====================================================== -->
+
+    <!-- =====================================================
+         COLLECTED DATA ANALYTICS
+         ===================================================== -->
+
     <section id="view-analytics" class="page-view">
 
       <div class="page-header">
@@ -152,7 +181,6 @@
       </div>
 
 
-      <!-- Small Info Boxes -->
       <div class="stats-grid">
 
         <div class="stat-card">
@@ -186,12 +214,11 @@
       </div>
 
 
-      <!-- ======================================================
-           5 IMPORTANT ANALYTICAL GRAPHS
-           ====================================================== -->
       <div class="charts-grid">
 
+
         <!-- Graph 1 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -201,17 +228,20 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="chart-waste-type"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
         <!-- Graph 2 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -221,17 +251,20 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="chart-segregation-practice"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
         <!-- Graph 3 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -241,17 +274,20 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="chart-awareness-level"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
         <!-- Graph 4 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -261,17 +297,20 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="chart-preferred-method"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
         <!-- Graph 5 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -281,11 +320,13 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="chart-disposal-frequency"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
@@ -293,12 +334,9 @@
       </div>
 
 
-      <!-- ======================================================
-           REMAINING 8 SURVEY RESULTS
-           ====================================================== -->
       <div class="survey-highlights-grid">
 
-        <!-- Q2 -->
+
         <div class="survey-highlight-card">
 
           <h3>
@@ -324,7 +362,6 @@
         </div>
 
 
-        <!-- Q4 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -342,7 +379,6 @@
         </div>
 
 
-        <!-- Q5 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -364,7 +400,6 @@
         </div>
 
 
-        <!-- Q8 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -394,7 +429,6 @@
         </div>
 
 
-        <!-- Q9 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -416,7 +450,6 @@
         </div>
 
 
-        <!-- Q11 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -438,7 +471,6 @@
         </div>
 
 
-        <!-- Q12 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -460,7 +492,6 @@
         </div>
 
 
-        <!-- Q13 -->
         <div class="survey-highlight-card">
 
           <h3>
@@ -500,7 +531,6 @@
       </div>
 
 
-      <!-- Survey Observation -->
       <div class="info-box survey-observation-box">
 
         <div class="info-box-header">
@@ -544,9 +574,12 @@
     </section>
 
 
-    <!-- ======================================================
-         3. SURVEYS PAGE
-         ====================================================== -->
+
+    <!-- =====================================================
+         SURVEYS
+         ONLY THIS SECTION HAS BEEN UPDATED
+         ===================================================== -->
+
     <section id="view-surveys" class="page-view">
 
       <div class="page-header">
@@ -556,16 +589,217 @@
         </h2>
 
         <p class="page-desc">
-          Visual analysis of the first 10 questions from the
-          collected field survey responses.
+          Visual comparison of field observations collected
+          from three locations in Boisar.
         </p>
 
       </div>
 
 
+      <!-- Field Visit Data -->
+
+      <div class="survey-data-box">
+
+        <div class="survey-data-header">
+
+          <span class="survey-data-icon">
+            📋
+          </span>
+
+          <h3>
+            Field Visit Data
+          </h3>
+
+        </div>
+
+
+        <div class="survey-table-wrapper">
+
+          <table class="survey-data-table">
+
+            <thead>
+
+              <tr>
+                <th>Area</th>
+                <th>Separate Bins</th>
+                <th>Segregation</th>
+                <th>Cleanliness</th>
+                <th>Covered Bins</th>
+                <th>Overflowing</th>
+                <th>Common Waste</th>
+                <th>Litter</th>
+                <th>Collection</th>
+                <th>Accessible</th>
+                <th>Awareness/Signage</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>
+                  <strong>
+                    Yashwant Shrusti, Boisar
+                  </strong>
+                </td>
+
+                <td>Yes</td>
+
+                <td>
+                  Partially Segregated
+                </td>
+
+                <td>
+                  Moderately Clean
+                </td>
+
+                <td>
+                  Yes, all covered
+                </td>
+
+                <td>
+                  Never
+                </td>
+
+                <td>
+                  Organic/Wet Waste
+                </td>
+
+                <td>
+                  No
+                </td>
+
+                <td>
+                  Waste Collection Vehicle
+                </td>
+
+                <td>
+                  Yes
+                </td>
+
+                <td>
+                  Yes
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>
+                    PAM, Boisar
+                  </strong>
+                </td>
+
+                <td>Yes</td>
+
+                <td>
+                  Partially Segregated
+                </td>
+
+                <td>
+                  Dirty
+                </td>
+
+                <td>
+                  Some are covered
+                </td>
+
+                <td>
+                  Sometimes
+                </td>
+
+                <td>
+                  Plastic Waste
+                </td>
+
+                <td>
+                  Somewhat
+                </td>
+
+                <td>
+                  Waste Collection Vehicle
+                </td>
+
+                <td>
+                  Yes
+                </td>
+
+                <td>
+                  No
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>
+                    Shivaji Nagar, Boisar
+                  </strong>
+                </td>
+
+                <td>
+                  No
+                </td>
+
+                <td>
+                  Not Segregated
+                </td>
+
+                <td>
+                  Dirty
+                </td>
+
+                <td>
+                  Some are covered
+                </td>
+
+                <td>
+                  Sometimes
+                </td>
+
+                <td>
+                  Plastic Waste
+                </td>
+
+                <td>
+                  Somewhat
+                </td>
+
+                <td>
+                  Waste Collection Vehicle
+                </td>
+
+                <td>
+                  Yes
+                </td>
+
+                <td>
+                  No
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+
+      <!-- Survey Comparison Graphs -->
+
       <div class="charts-grid survey-charts-grid">
 
-        <!-- Survey 1 -->
+
         <div class="chart-card">
 
           <div class="chart-header">
@@ -575,203 +809,217 @@
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-1"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 2 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              2. Approximate Daily Waste Generation
+              2. Separate Wet & Dry Waste Bins
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-2"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 3 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              3. Waste Segregation Before Disposal
+              3. Waste Segregation
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-3"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 4 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              4. Separate Wet & Dry Waste Bins
+              4. Cleanliness Level
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-4"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 5 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              5. Usual Waste Separation Method
+              5. Covered Bins
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-5"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 6 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              6. Knowledge of Importance of Segregation
+              6. Waste Bin Overflowing
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-6"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 7 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              7. Waste Collection Frequency
+              7. Litter Around the Area
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-7"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 8 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              8. Waste Collector
+              8. Waste Collection Method
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-8"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 9 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              9. Satisfaction with Waste Collection
+              9. Waste Management Accessibility
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-9"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
 
 
-        <!-- Survey 10 -->
         <div class="chart-card">
 
           <div class="chart-header">
             <h3>
-              10. Biggest Waste Management Problem
+              10. Awareness / Signage
             </h3>
           </div>
 
           <div class="chart-container">
+
             <canvas
               id="survey-chart-10"
               width="400"
               height="260">
             </canvas>
+
           </div>
 
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- ======================================================
-         4. FINDINGS PAGE
-         ====================================================== -->
+
+    <!-- =====================================================
+         FINDINGS
+         ===================================================== -->
+
     <section id="view-findings" class="page-view">
 
       <div class="page-header">
@@ -790,16 +1038,24 @@
 
       <div class="findings-grid">
 
+
         <div class="finding-card">
 
           <div class="finding-title">
-            <span class="finding-icon">♻️</span>
+
+            <span class="finding-icon">
+              ♻️
+            </span>
+
             Waste Segregation
+
           </div>
 
           <div class="finding-text">
+
             Waste should be separated at source into appropriate
             categories such as wet, dry and recyclable waste.
+
           </div>
 
         </div>
@@ -808,13 +1064,20 @@
         <div class="finding-card">
 
           <div class="finding-title">
-            <span class="finding-icon">🏠</span>
+
+            <span class="finding-icon">
+              🏠
+            </span>
+
             Community Participation
+
           </div>
 
           <div class="finding-text">
+
             Community participation plays an important role in
             improving waste management.
+
           </div>
 
         </div>
@@ -823,13 +1086,20 @@
         <div class="finding-card">
 
           <div class="finding-title">
-            <span class="finding-icon">🌱</span>
+
+            <span class="finding-icon">
+              🌱
+            </span>
+
             Environmental Protection
+
           </div>
 
           <div class="finding-text">
+
             Better segregation and recycling can help reduce
             environmental pollution.
+
           </div>
 
         </div>
@@ -838,13 +1108,20 @@
         <div class="finding-card">
 
           <div class="finding-title">
-            <span class="finding-icon">📢</span>
+
+            <span class="finding-icon">
+              📢
+            </span>
+
             Public Awareness
+
           </div>
 
           <div class="finding-text">
+
             Regular awareness programs can encourage responsible
             waste disposal practices.
+
           </div>
 
         </div>
@@ -852,7 +1129,6 @@
       </div>
 
 
-      <!-- Recommendations -->
       <div class="recommendations-box">
 
         <div class="recommendations-header">
@@ -866,6 +1142,7 @@
           </h3>
 
         </div>
+
 
         <ul class="recommendations-list">
 
@@ -898,6 +1175,7 @@
       </div>
 
     </section>
+
 
   </main>
 
